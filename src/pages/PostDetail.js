@@ -6,6 +6,7 @@ import PostText from 'components/PostText';
 import QuotedPost from 'components/QuotedPost';
 import ReactionsBar from 'components/ReactionsBar';
 import UserLink from 'components/UserLink';
+import { useTheme } from 'context/ThemeContext';
 import React from 'react';
 import { Col, Figure, Row } from 'react-bootstrap';
 import { useQuery } from 'react-query';
@@ -16,6 +17,7 @@ import { formatDate, formatTime } from '../utils/date';
 
 export default function PostDetail() {
   const { postId } = useParams();
+  const { theme } = useTheme();
   const { data: post, isLoading } = useQuery('PostDetail', () =>
     getPostById(postId),
   );
@@ -55,10 +57,10 @@ export default function PostDetail() {
               <UserLink
                 user={post.user}
                 to={`/user/${post.user.screen_name}`}
-                className='text-dark font-weight-bold mr-1'>
+                className='font-weight-bold mr-1'>
                 {post.user.name}
               </UserLink>
-              <span className='text-muted mr-1'>@{post.user.screen_name}</span>
+              <span className='mr-1'>@{post.user.screen_name}</span>
             </Col>
           </Row>
           <Row></Row>
